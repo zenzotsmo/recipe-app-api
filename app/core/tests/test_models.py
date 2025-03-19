@@ -48,4 +48,3 @@ class ModelTest(TestCase):
 
         self.assertEqual(user.is_superuser, True)
         self.assertEqual(user.is_staff, True)
-        
