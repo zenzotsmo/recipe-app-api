@@ -9,14 +9,14 @@ from core import models
 
 
 class UserAdmin(BaseUserAdmin):
-    """Define the adminpages for users."""
+    """Define the admin pages for users."""
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
         # None is the title and we are not using it.
         (None, {'fields': ('email', 'password')}),
         (
-            # this _ is a django convention to calle the translator.
+            # this _ is a django convention to call the translator.
             _('Permissions'),
             {
                 'fields': (
@@ -53,3 +53,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Recipe)

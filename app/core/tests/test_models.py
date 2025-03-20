@@ -2,8 +2,12 @@
 Test custom Django management commands.
 """
 
+from decimal import Decimal
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+
+from core import models
 
 
 class ModelTest(TestCase):
@@ -48,3 +52,20 @@ class ModelTest(TestCase):
 
         self.assertEqual(user.is_superuser, True)
         self.assertEqual(user.is_staff, True)
+
+    def test_create_recipe(self):
+        """Test creating a recipe."""
+        user = get_user_model().objects.create_user(
+            'test@example.com',
+            'testpass123',
+        )
+
+        recipe = models.Recipe.objects.create(
+            user=user,
+            title='Chocolate cake',
+            time_minutes=5,
+            price=Decimal('5.50'),
+            description='Yummy chocolate cake',
+        )
+
+        self.assertEqual(str(recipe), recipe.title)
