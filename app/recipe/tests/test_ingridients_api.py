@@ -21,7 +21,9 @@ def detail_url(ingredient_id):
     """Return ingredient detail URL."""
     return reverse('recipe:ingredient-detail', args=[ingredient_id])
 
-def create_user(email='user@example', password='testpass123'):
+
+def create_user(email='user@example',
+                password='testpass123'):
     """Create a user."""
     return get_user_model().objects.create_user(email=email, password=password)
 
@@ -90,4 +92,5 @@ class PrivateIngredientsApiTests(TestCase):
         res = self.client.delete(url)
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Ingredient.objects.filter(id=ingredient.id).exists(), False)
+        ingredients = Ingredient.objects.filter(id=ingredient.id).exists()
+        self.assertEqual(ingredients, False)

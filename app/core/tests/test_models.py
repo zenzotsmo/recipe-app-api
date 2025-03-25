@@ -88,4 +88,3 @@ class ModelTest(TestCase):
         ingredient = models.Ingredient.objects.create(user=user, name='Salt')
 
         self.assertEqual(str(ingredient), ingredient.name)
-
